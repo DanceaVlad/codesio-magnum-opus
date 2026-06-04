@@ -1,3 +1,13 @@
+# Tooling
+
+This repo uses `mise` for tool versions and common tasks in `mise.toml`. Prefer `mise` tasks when running project-wide checks, formatting, building or testing.
+
+- `mise run check` runs frontend and backend checks.
+- `mise run apply` applies formatting and autofixable lint changes.
+- `mise run setup-hooks` installs Lefthook Git hooks; pre-commit runs `mise run check`.
+- Frontend tooling uses Bun.
+- Backend tooling uses Java 25 and the Maven wrapper.
+
 # Angular
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
