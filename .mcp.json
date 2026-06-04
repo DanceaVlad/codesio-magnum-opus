@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "angular-cli": {
+      "type": "stdio",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cd magnum-opus-frontend && ./node_modules/.bin/ng mcp"
+      ]
+    }
+  }
+}
