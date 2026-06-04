@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'cds-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('magnum-opus-frontend');
