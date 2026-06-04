@@ -1,0 +1,45 @@
+name: Documentation
+description: Documentation, README, setup notes, or internal explanation
+title: "Documentation: "
+labels: ["documentation"]
+body:
+    - type: textarea
+      id: topic
+      attributes:
+          label: Topic
+          description: What needs to be documented?
+          placeholder: "Document the local development setup."
+      validations:
+          required: true
+
+    - type: textarea
+      id: audience
+      attributes:
+          label: Audience
+          description: Who is this documentation for?
+          placeholder: "Future me setting up the project on a new machine."
+      validations:
+          required: false
+
+    - type: textarea
+      id: content
+      attributes:
+          label: Content to include
+          description: What should the documentation cover?
+          placeholder: |
+              - Required tools
+              - Environment variables
+              - Database setup
+              - How to run the app
+              - How to run tests
+      validations:
+          required: false
+
+    - type: textarea
+      id: location
+      attributes:
+          label: Location
+          description: Where should this documentation live?
+          placeholder: "README.md, docs/development.md, docs/architecture/tenant-isolation.md"
+      validations:
+          required: false

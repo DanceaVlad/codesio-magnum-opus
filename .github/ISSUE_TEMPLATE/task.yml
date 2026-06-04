@@ -1,0 +1,53 @@
+name: Task
+description: Concrete implementation or maintenance work
+title: "Task: "
+labels: ["task"]
+body:
+    - type: textarea
+      id: task
+      attributes:
+          label: Task
+          description: What needs to be done?
+          placeholder: "Add tenant_id to the bookings table."
+      validations:
+          required: true
+
+    - type: textarea
+      id: reason
+      attributes:
+          label: Why
+          description: Why is this task needed?
+          placeholder: "Bookings must be scoped to a tenant so clubs cannot access each other's data."
+      validations:
+          required: false
+
+    - type: textarea
+      id: acceptance
+      attributes:
+          label: Acceptance criteria
+          description: How do I know this task is done?
+          placeholder: |
+              - [ ] bookings table has tenant_id
+              - [ ] tenant_id is required
+              - [ ] booking queries are tenant-scoped
+              - [ ] tenant isolation test exists
+      validations:
+          required: false
+
+    - type: input
+      id: parent
+      attributes:
+          label: Parent issue
+          description: Optional parent feature, spike, or decision
+          placeholder: "#12"
+      validations:
+          required: false
+
+    - type: textarea
+      id: notes
+      attributes:
+          label: Notes
+          description: Implementation notes, risks, links, or reminders
+          placeholder: "Remember to update seed data and migrations."
+      validations:
+          required: false
