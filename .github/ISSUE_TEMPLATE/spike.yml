@@ -1,0 +1,47 @@
+name: Spike
+description: Research, investigation, or unknowns
+title: "Spike: "
+labels: ["spike"]
+body:
+    - type: textarea
+      id: question
+      attributes:
+          label: Question
+          description: What am I trying to figure out?
+          placeholder: "How should issue, branch, commit, and PR naming work in this project?"
+      validations:
+          required: true
+
+    - type: textarea
+      id: context
+      attributes:
+          label: Context
+          description: Why does this matter?
+          placeholder: "I want a consistent GitHub workflow before the project grows."
+      validations:
+          required: false
+
+    - type: textarea
+      id: options
+      attributes:
+          label: Options to investigate
+          description: What approaches should I compare?
+          placeholder: |
+              - Plain GitHub issue numbers
+              - Jira-style PAD-123 naming
+              - Conventional commits
+              - Branch names with issue numbers
+      validations:
+          required: false
+
+    - type: textarea
+      id: constraints
+      attributes:
+          label: Constraints
+          description: What should influence the decision?
+          placeholder: |
+              - I am working alone
+              - Keep the workflow GitHub-native
+              - Avoid unnecessary process overhead
+      validations:
+          required: false

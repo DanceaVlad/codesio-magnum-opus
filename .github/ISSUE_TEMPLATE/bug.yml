@@ -1,0 +1,64 @@
+name: Bug
+description: Something is broken or behaves incorrectly
+title: "Bug: "
+labels: ["bug"]
+body:
+    - type: textarea
+      id: problem
+      attributes:
+          label: Problem
+          description: What is broken?
+          placeholder: "Bookings can overlap on the same court."
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected behavior
+          description: What should happen instead?
+          placeholder: "The system should reject overlapping bookings for the same court."
+      validations:
+          required: true
+
+    - type: textarea
+      id: actual
+      attributes:
+          label: Actual behavior
+          description: What actually happens?
+          placeholder: "The second booking is created even though it overlaps with the first one."
+      validations:
+      required: false
+
+    - type: textarea
+      id: steps
+      attributes:
+          label: Steps to reproduce
+          description: How can I reproduce it?
+          placeholder: |
+              1. Create a booking from 10:00 to 11:00
+              2. Create another booking from 10:30 to 11:30 on the same court
+              3. Both bookings are accepted
+      validations:
+          required: false
+
+    - type: textarea
+      id: notes
+      attributes:
+          label: Notes
+          description: Logs, screenshots, affected area, suspected cause, or related issues
+          placeholder: "Might be missing overlap validation in the booking service."
+      validations:
+          required: false
+
+    - type: textarea
+      id: acceptance
+      attributes:
+          label: Acceptance criteria
+          description: How do I know the bug is fixed?
+          placeholder: |
+              - [ ] Overlapping bookings for the same court are rejected
+              - [ ] Non-overlapping bookings are still accepted
+              - [ ] Tests cover the overlap case
+      validations:
+          required: false
