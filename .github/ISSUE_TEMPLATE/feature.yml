@@ -1,0 +1,45 @@
+name: Feature
+description: New user-facing or product capability
+title: "Feature: "
+labels: ["feature"]
+body:
+    - type: textarea
+      id: goal
+      attributes:
+          label: Goal
+          description: What should exist when this is done?
+          placeholder: "Club admins can configure booking cancellation rules."
+      validations:
+          required: true
+
+    - type: textarea
+      id: user_value
+      attributes:
+          label: User value
+          description: Who benefits and why?
+          placeholder: "Club admins need flexible rules depending on their business model."
+      validations:
+          required: false
+
+    - type: textarea
+      id: scope
+      attributes:
+          label: Scope
+          description: What is included?
+          placeholder: |
+              - Admin can configure cancellation window
+              - Player sees cancellation policy before booking
+              - System prevents invalid cancellations
+      validations:
+          required: false
+
+    - type: textarea
+      id: out_of_scope
+      attributes:
+          label: Out of scope
+          description: What is explicitly not part of this?
+          placeholder: |
+              - Automated refunds
+              - Per-court cancellation rules
+      validations:
+          required: false
