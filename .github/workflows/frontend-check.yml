@@ -1,0 +1,80 @@
+name: Frontend Check
+
+on:
+    pull_request:
+    push:
+        branches-ignore:
+            - main
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+concurrency:
+    group: frontend-check-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    changes:
+        name: Frontend change detection
+        runs-on: ubuntu-latest
+        outputs:
+            frontend: ${{ steps.changed-files.outputs.frontend }}
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - name: Detect frontend changes
+              id: changed-files
+              shell: bash
+              run: |
+                  changed_files="$(mktemp)"
+
+                  if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+                    git diff --name-only "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}" > "${changed_files}"
+                  elif [[ "${{ github.event_name }}" == "push" && "${{ github.event.before }}" != "0000000000000000000000000000000000000000" ]]; then
+                    git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" > "${changed_files}"
+                  else
+                    printf '%s\n' "magnum-opus-frontend/" > "${changed_files}"
+                  fi
+
+                  if grep -Eq '^(magnum-opus-frontend/|mise\.toml$|\.github/workflows/frontend-check\.yml$)' "${changed_files}"; then
+                    echo "frontend=true" >> "${GITHUB_OUTPUT}"
+                  else
+                    echo "frontend=false" >> "${GITHUB_OUTPUT}"
+                  fi
+
+    frontend-check:
+        name: Frontend formatting and linting
+        needs: changes
+        if: needs.changes.outputs.frontend == 'true'
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+
+            - name: Set up mise tools
+              uses: jdx/mise-action@v3
+              with:
+                  install_args: bun
+                  cache: true
+
+            - name: Cache Bun package cache
+              uses: actions/cache@v5
+              with:
+                  path: ~/.bun/install/cache
+                  key: ${{ runner.os }}-bun-${{ hashFiles('magnum-opus-frontend/bun.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-bun-
+
+            - name: Install frontend dependencies
+              working-directory: magnum-opus-frontend
+              run: bun install --frozen-lockfile
+
+            - name: Check frontend formatting and linting
+              run: mise run check:frontend
