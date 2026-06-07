@@ -5,10 +5,13 @@ on:
     push:
         branches:
             - main
+        paths-ignore:
+            - infra/apps/frontend/deployment.yaml
+            - infra/apps/backend/deployment.yaml
     workflow_dispatch:
 
 permissions:
-    contents: read
+    contents: write
     packages: write
 
 concurrency:
@@ -16,7 +19,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    build-and-push:
+    build-images:
         name: Build container images
         runs-on: ubuntu-latest
         timeout-minutes: 30
@@ -56,3 +59,41 @@ jobs:
                       ${{ matrix.image }}:latest
                   cache-from: type=gha,scope=${{ matrix.name }}
                   cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+
+    promote-images:
+        name: Promote image tags
+        needs: build-images
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v6
+
+            - name: Update app image tags
+              shell: bash
+              run: |
+                  set -euo pipefail
+
+                  frontend_image="ghcr.io/danceavlad/codesio-magnum-opus/frontend:${GITHUB_SHA}"
+                  backend_image="ghcr.io/danceavlad/codesio-magnum-opus/backend:${GITHUB_SHA}"
+
+                  sed -i "s#image: ghcr.io/danceavlad/codesio-magnum-opus/frontend:.*#image: ${frontend_image}#" infra/apps/frontend/deployment.yaml
+                  sed -i "s#image: ghcr.io/danceavlad/codesio-magnum-opus/backend:.*#image: ${backend_image}#" infra/apps/backend/deployment.yaml
+
+            - name: Commit promoted image tags
+              shell: bash
+              run: |
+                  set -euo pipefail
+
+                  if git diff --quiet -- infra/apps/frontend/deployment.yaml infra/apps/backend/deployment.yaml; then
+                    echo "Image tags are already promoted."
+                    exit 0
+                  fi
+
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add infra/apps/frontend/deployment.yaml infra/apps/backend/deployment.yaml
+                  git commit -m "Promote app images to ${GITHUB_SHA}"
+                  git push
