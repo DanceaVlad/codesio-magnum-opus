@@ -4,33 +4,29 @@ Do not commit plaintext Kubernetes Secrets.
 
 This deployment expects the Sealed Secrets controller to be installed by Argo CD before sealed secret manifests are synced.
 
-## Cloudflare tunnel credentials
+## Cloudflare tunnel token
 
-Create a locally managed Cloudflare Tunnel and keep the generated `credentials.json` private. Then create and seal the Kubernetes secret:
+Create a remotely managed Cloudflare Tunnel in the Cloudflare dashboard. Choose Docker for the setup environment and copy only the `eyJ...` tunnel token from the generated command. Do not commit the plaintext token.
 
 ```sh
-kubectl -n cloudflare create secret generic cloudflared-credentials \
-  --from-file=credentials.json=/path/to/<tunnel-id>.json \
+kubectl -n cloudflare create secret generic cloudflared-token \
+  --from-literal=token='<cloudflare-tunnel-token>' \
   --dry-run=client -o yaml \
   | kubeseal --format=yaml \
-  > infra/secrets/cloudflared-credentials.sealedsecret.yaml
+  > infra/secrets/cloudflared-token.sealedsecret.yaml
 ```
 
 After creating the sealed secret, add it to `infra/platform/cloudflared/kustomization.yaml` or to a dedicated secret Application.
 
-## Hostname placeholders
+## Cloudflare public hostnames
 
-Replace these placeholders before syncing production:
+Configure these public hostnames on the Cloudflare Tunnel:
 
 - `opus.codesio.com`
 - `auth.opus.codesio.com`
-- `00000000-0000-0000-0000-000000000000`
 
-Files that contain host placeholders:
+Use these service targets:
 
-- `infra/platform/cloudflared/configmap.yaml`
-- `infra/platform/keycloak/keycloak.yaml`
-- `infra/platform/keycloak/realm-import.yaml`
-- `infra/apps/backend/kustomization.yaml`
-- `infra/apps/frontend/runtime-config.json`
-- `magnum-opus-frontend/public/config/runtime-config.json`
+- `auth.opus.codesio.com` -> `http://keycloak-service.auth.svc.cluster.local:8080`
+- `opus.codesio.com` with path `^/api` -> `http://backend.app.svc.cluster.local:8080`
+- `opus.codesio.com` -> `http://frontend.app.svc.cluster.local:8080`
