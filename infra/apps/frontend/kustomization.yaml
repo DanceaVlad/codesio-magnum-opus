@@ -6,5 +6,3 @@ configMapGenerator:
     namespace: app
     files:
       - runtime-config.json
-generatorOptions:
-  disableNameSuffixHash: true

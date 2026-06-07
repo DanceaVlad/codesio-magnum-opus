@@ -10,5 +10,3 @@ configMapGenerator:
       - SPRING_DATA_REDIS_HOST=redis.cache.svc.cluster.local
       - SPRING_DATA_REDIS_PORT=6379
       - OAUTH2_ISSUER_URI=https://opus-auth.codesio.com/realms/magnum-opus
-generatorOptions:
-  disableNameSuffixHash: true
