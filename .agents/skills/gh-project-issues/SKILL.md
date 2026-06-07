@@ -1,6 +1,6 @@
 ---
 name: gh-project-issues
-description: Reliably follow the GitHub workflow for DanceaVlad/codesio-magnum-opus: create issues, add them to the Codesio-Magnum-Opus GitHub Project, create correctly named branches, make conventional commits, and create pull requests from the repository template. Use when an agent must create a task, feature, bug, spike, or documentation issue, add it to https://github.com/users/DanceaVlad/projects/4, set project Status, branch from an issue, commit work, or open a PR.
+description: "Reliably follow the GitHub workflow for DanceaVlad/codesio-magnum-opus: create issues, add them to the Codesio-Magnum-Opus GitHub Project, create correctly named branches, make conventional commits, and create pull requests from the repository template. Use when an agent must create a task, feature, bug, spike, or documentation issue, add it to https://github.com/users/DanceaVlad/projects/4, set project Status, branch from an issue, commit work, or open a PR."
 ---
 
 # GitHub Project Workflow
