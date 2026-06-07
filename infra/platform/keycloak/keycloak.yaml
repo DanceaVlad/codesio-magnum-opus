@@ -17,7 +17,7 @@ spec:
       name: keycloak-postgres-app
       key: password
   hostname:
-    hostname: auth.opus.codesio.com
+    hostname: opus-auth.codesio.com
     strict: true
   http:
     httpEnabled: true
