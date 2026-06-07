@@ -17,10 +17,10 @@ This repo deploys Magnum Opus to a single-node k3s cluster on a Hetzner VPS, man
 1. Point the repo remote used by Argo CD at a URL the VPS can read.
 2. Confirm the public hostnames:
    - `opus.codesio.com`
-   - `auth.opus.codesio.com`
+   - `opus-auth.codesio.com`
 3. Create a remotely managed Cloudflare Tunnel in the Cloudflare dashboard.
 4. Configure the tunnel public hostnames:
-   - `auth.opus.codesio.com` -> `http://keycloak-service.auth.svc.cluster.local:8080`
+   - `opus-auth.codesio.com` -> `http://keycloak-service.auth.svc.cluster.local:8080`
    - `opus.codesio.com` with path `^/api` -> `http://backend.app.svc.cluster.local:8080`
    - `opus.codesio.com` -> `http://frontend.app.svc.cluster.local:8080`
 5. Copy the tunnel token from the Docker setup command and add a sealed secret for `cloudflared-token`.

@@ -1,5 +1,5 @@
 {
   "apiBaseUrl": "/api",
-  "oidcIssuer": "https://auth.opus.codesio.com/realms/magnum-opus",
+  "oidcIssuer": "https://opus-auth.codesio.com/realms/magnum-opus",
   "oidcClientId": "magnum-opus-frontend"
 }

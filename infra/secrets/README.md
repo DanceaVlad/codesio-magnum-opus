@@ -23,10 +23,10 @@ After creating the sealed secret, add it to `infra/platform/cloudflared/kustomiz
 Configure these public hostnames on the Cloudflare Tunnel:
 
 - `opus.codesio.com`
-- `auth.opus.codesio.com`
+- `opus-auth.codesio.com`
 
 Use these service targets:
 
-- `auth.opus.codesio.com` -> `http://keycloak-service.auth.svc.cluster.local:8080`
+- `opus-auth.codesio.com` -> `http://keycloak-service.auth.svc.cluster.local:8080`
 - `opus.codesio.com` with path `^/api` -> `http://backend.app.svc.cluster.local:8080`
 - `opus.codesio.com` -> `http://frontend.app.svc.cluster.local:8080`
