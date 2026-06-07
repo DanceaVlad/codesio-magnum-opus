@@ -1,0 +1,4 @@
+resources:
+  - namespaces.yaml
+  - app-postgres.yaml
+  - keycloak-postgres.yaml

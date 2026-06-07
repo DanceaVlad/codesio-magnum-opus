@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: magnum-opus
+  namespace: argocd
+spec:
+  description: Magnum Opus single-node k3s deployment
+  sourceRepos:
+    - https://github.com/DanceaVlad/codesio-magnum-opus.git
+    - https://cloudnative-pg.github.io/charts
+    - https://bitnami-labs.github.io/sealed-secrets
+    - https://valkey.io/valkey-helm/
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

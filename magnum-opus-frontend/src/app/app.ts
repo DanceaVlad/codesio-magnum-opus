@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+import { RuntimeConfigService } from './runtime-config.service';
 
 @Component({
   selector: 'cds-root',
@@ -9,4 +11,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('magnum-opus-frontend');
+  protected readonly runtimeConfig = inject(RuntimeConfigService);
 }

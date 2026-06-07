@@ -1,0 +1,25 @@
+apiVersion: k8s.keycloak.org/v2beta1
+kind: KeycloakRealmImport
+metadata:
+  name: magnum-opus
+  namespace: auth
+spec:
+  keycloakCRName: keycloak
+  realm:
+    realm: magnum-opus
+    enabled: true
+    displayName: Magnum Opus
+    clients:
+      - clientId: magnum-opus-frontend
+        name: Magnum Opus Frontend
+        protocol: openid-connect
+        publicClient: true
+        standardFlowEnabled: true
+        directAccessGrantsEnabled: false
+        serviceAccountsEnabled: false
+        redirectUris:
+          - https://opus.codesio.com/*
+        webOrigins:
+          - https://opus.codesio.com
+        attributes:
+          pkce.code.challenge.method: S256
