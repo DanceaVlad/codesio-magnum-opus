@@ -5,7 +5,7 @@ This repo deploys Magnum Opus to a single-node k3s cluster on a Hetzner VPS, man
 ## What Gets Deployed
 
 - Angular frontend, public through Cloudflare Tunnel.
-- Spring Boot backend, public only through the frontend host `/api/*` route.
+- Spring Boot backend, public only through the frontend host `/api` route.
 - Keycloak, public on its auth hostname for browser OIDC.
 - App Postgres through CloudNativePG.
 - Keycloak Postgres through CloudNativePG.
@@ -18,9 +18,13 @@ This repo deploys Magnum Opus to a single-node k3s cluster on a Hetzner VPS, man
 2. Confirm the public hostnames:
    - `opus.codesio.com`
    - `auth.opus.codesio.com`
-3. Replace the Cloudflare Tunnel ID in `infra/platform/cloudflared/configmap.yaml`.
-4. Add a sealed secret for `cloudflared-credentials`.
-5. Push image tags to GHCR or change the image tags in:
+3. Create a remotely managed Cloudflare Tunnel in the Cloudflare dashboard.
+4. Configure the tunnel public hostnames:
+   - `auth.opus.codesio.com` -> `http://keycloak-service.auth.svc.cluster.local:8080`
+   - `opus.codesio.com` with path `^/api` -> `http://backend.app.svc.cluster.local:8080`
+   - `opus.codesio.com` -> `http://frontend.app.svc.cluster.local:8080`
+5. Copy the tunnel token from the Docker setup command and add a sealed secret for `cloudflared-token`.
+6. Push image tags to GHCR or change the image tags in:
    - `infra/apps/frontend/deployment.yaml`
    - `infra/apps/backend/deployment.yaml`
 

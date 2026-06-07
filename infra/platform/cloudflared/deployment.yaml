@@ -19,25 +19,20 @@ spec:
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:2026.5.0
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflared-token
+                  key: token
           args:
             - tunnel
-            - --config
-            - /etc/cloudflared/config/config.yaml
+            - --no-autoupdate
+            - --loglevel
+            - info
+            - --metrics
+            - 0.0.0.0:2000
             - run
           ports:
             - name: metrics
               containerPort: 2000
-          volumeMounts:
-            - name: config
-              mountPath: /etc/cloudflared/config
-              readOnly: true
-            - name: credentials
-              mountPath: /etc/cloudflared/creds
-              readOnly: true
-      volumes:
-        - name: config
-          configMap:
-            name: cloudflared-config
-        - name: credentials
-          secret:
-            secretName: cloudflared-credentials
