@@ -1,0 +1,10 @@
+resources:
+  - sealed-secrets.yaml
+  - cloudnativepg.yaml
+  - keycloak-operator.yaml
+  - databases.yaml
+  - valkey.yaml
+  - keycloak.yaml
+  - backend.yaml
+  - frontend.yaml
+  - cloudflared.yaml

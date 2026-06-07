@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: magnum-opus-root
+  namespace: argocd
+spec:
+  project: magnum-opus
+  source:
+    repoURL: https://github.com/DanceaVlad/codesio-magnum-opus.git
+    targetRevision: HEAD
+    path: infra/argocd/applications
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,10 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+configMapGenerator:
+  - name: frontend-runtime-config
+    namespace: app
+    files:
+      - runtime-config.json
+generatorOptions:
+  disableNameSuffixHash: true

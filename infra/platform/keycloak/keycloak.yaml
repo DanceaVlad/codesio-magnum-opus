@@ -1,0 +1,35 @@
+apiVersion: k8s.keycloak.org/v2beta1
+kind: Keycloak
+metadata:
+  name: keycloak
+  namespace: auth
+spec:
+  instances: 1
+  db:
+    vendor: postgres
+    host: keycloak-postgres-rw.auth.svc.cluster.local
+    port: 5432
+    database: keycloak
+    usernameSecret:
+      name: keycloak-postgres-app
+      key: username
+    passwordSecret:
+      name: keycloak-postgres-app
+      key: password
+  hostname:
+    hostname: auth.opus.codesio.com
+    strict: true
+  http:
+    httpEnabled: true
+  proxy:
+    headers: xforwarded
+  unsupported:
+    podTemplate:
+      spec:
+        containers:
+          - name: keycloak
+            env:
+              - name: KC_HEALTH_ENABLED
+                value: "true"
+              - name: KC_METRICS_ENABLED
+                value: "true"
