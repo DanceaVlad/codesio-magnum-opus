@@ -25,8 +25,8 @@ run = "lefthook install"
 # === Secondary tasks ===
 
 [tasks."dev:docker"]
-description = "Start local Postgres and Keycloak services for development."
-run = "docker compose -f compose.dev.yaml up -d app-postgres keycloak"
+description = "Start local Postgres and Keycloak services for development, waiting until they are healthy."
+run = "docker compose -f compose.dev.yaml up --detach --wait app-postgres keycloak-postgres keycloak"
 
 [tasks."dev:frontend"]
 description = "Start the Angular frontend dev server."
