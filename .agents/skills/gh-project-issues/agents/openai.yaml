@@ -1,4 +1,0 @@
-interface:
-  display_name: "GitHub Project Issues"
-  short_description: "Create repo issues in the GitHub project"
-  default_prompt: "Use $gh-project-issues to create a GitHub issue in the repository project with the right label and status."
