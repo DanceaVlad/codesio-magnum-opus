@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'cds-root',
+  selector: 'cds-shell',
   imports: [RouterOutlet],
-  templateUrl: './app.html',
+  templateUrl: './shell.html',
 })
-export class App {}
+export class Shell {}
