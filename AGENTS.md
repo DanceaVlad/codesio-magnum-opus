@@ -8,6 +8,18 @@ This repo uses `mise` for tool versions and common tasks in `mise.toml`. Prefer 
 - Frontend tooling uses Bun.
 - Backend tooling uses Java 25 and the Maven wrapper.
 
+# Backend Architecture
+
+The backend is a Spring Modulith on Spring Boot 4 / Java 25. Business
+capabilities must be explicitly annotated `@ApplicationModule` packages; expose
+only public records, `*Management` interfaces, events, and contract enums from
+the module root package; keep entities, repositories, services, adapters,
+listeners, controllers, and persistence details under `internal`. Cross-module
+code must depend only on public module APIs/events.
+
+Read `docs/backend/architecture.md` before adding or substantially changing
+backend modules.
+
 # Angular
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
