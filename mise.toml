@@ -13,11 +13,40 @@ depends = ["apply:frontend", "apply:backend"]
 description = "Check formatting and linting for frontend and backend. Run in CI/CD and commit hooks."
 depends = ["check:frontend", "check:backend"]
 
+[tasks.dev]
+description = "Start the full local dev environment: Docker services, backend, and frontend."
+depends = ["dev:docker"]
+run = "mise run dev:backend ::: dev:frontend"
+
 [tasks."setup-hooks"]
 description = "Install Git hooks for this repo."
 run = "lefthook install"
 
 # === Secondary tasks ===
+
+[tasks."dev:docker"]
+description = "Start local Postgres and Keycloak services for development."
+run = "docker compose -f compose.dev.yaml up -d app-postgres keycloak"
+
+[tasks."dev:frontend"]
+description = "Start the Angular frontend dev server."
+dir = "magnum-opus-frontend"
+run = "bun run start -- --proxy-config proxy.conf.json"
+
+[tasks."dev:backend"]
+description = "Start the Spring Boot backend dev server against the local Postgres database."
+dir = "magnum-opus-backend"
+env = { SPRING_DATASOURCE_URL = "jdbc:postgresql://localhost:5432/magnum_opus", SPRING_DATASOURCE_USERNAME = "magnum_opus", SPRING_DATASOURCE_PASSWORD = "magnum_opus", SPRING_JPA_HIBERNATE_DDL_AUTO = "validate", SPRING_JPA_OPEN_IN_VIEW = "false", MANAGEMENT_HEALTH_REDIS_ENABLED = "false", OAUTH2_ISSUER_URI = "http://localhost:8180/realms/magnum-opus" }
+run = "./mvnw spring-boot:run"
+
+[tasks."db:nuke"]
+description = "Recreate the local application database container and volume."
+run = """
+docker compose -f compose.dev.yaml stop app-postgres
+docker compose -f compose.dev.yaml rm -f app-postgres
+docker volume rm magnum-opus-app-postgres-data || true
+docker compose -f compose.dev.yaml up -d app-postgres
+"""
 
 [tasks."apply:frontend"]
 description = "Apply frontend formatting and autofixable lint fixes"
