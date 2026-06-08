@@ -1,4 +1,4 @@
-package com.codesio.magnum_opus.court;
+package com.codesio.magnum_opus.courts;
 
 public enum CourtType {
   INDOOR,

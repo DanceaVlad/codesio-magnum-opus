@@ -1,5 +1,6 @@
-package com.codesio.magnum_opus.court;
+package com.codesio.magnum_opus.courts.internal;
 
+import com.codesio.magnum_opus.courts.CourtType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,17 +15,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Table(name = "courts")
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @RequiredArgsConstructor
 @SuppressWarnings("PMD.ShortVariable")
-public class Court {
+class Court {
 
   @Id
   @UuidGenerator(style = UuidGenerator.Style.VERSION_7)
