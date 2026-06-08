@@ -21,7 +21,7 @@ class K8sSecurityConfig {
             authorize ->
                 authorize
                     .requestMatchers(
-                        "/actuator/health",
+                        "/actuator/health/**",
                         "/actuator/info",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
