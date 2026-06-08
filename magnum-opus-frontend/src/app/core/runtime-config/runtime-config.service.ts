@@ -1,8 +1,8 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, Service, signal } from '@angular/core';
 
 import { DEFAULT_RUNTIME_CONFIG, RuntimeConfig } from './runtime-config';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class RuntimeConfigService {
   private readonly state = signal(DEFAULT_RUNTIME_CONFIG);
   private readonly loadedState = signal(false);
