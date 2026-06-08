@@ -95,6 +95,9 @@ Architecture enforcement currently comes from:
 
 Run `mise run check:backend` before merging backend changes.
 
+For runtime logging, metrics, and health probe conventions, see
+`docs/backend/observability.md`.
+
 ## Generated Documentation
 
 Do not add generated Spring Modulith diagrams, canvases, or documentation

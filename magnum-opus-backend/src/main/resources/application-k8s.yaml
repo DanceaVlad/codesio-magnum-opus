@@ -26,4 +26,13 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,metrics,prometheus
+
+logging:
+  structured:
+    format:
+      console: ecs
+  level:
+    com.codesio.magnum_opus: INFO
+    org.hibernate.SQL: WARN
+    org.springframework.security: INFO
