@@ -2,10 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>MagnumOpusFrontend</title>
+    <title>MagnumOpus</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="hsl(0 0% 100%)" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="hsl(240 10% 3.9%)" media="(prefers-color-scheme: dark)" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira+Semi+Condensed:ital,wght@0,700;0,800;1,700;1,800&display=swap"
+      rel="stylesheet" />
+    <style>
+      html {
+        background-color: hsl(0 0% 100%);
+      }
+      html.dark {
+        background-color: hsl(240 10% 3.9%);
+      }
+      html.no-transitions,
+      html.no-transitions * {
+        transition: none;
+      }
+    </style>
   </head>
   <body>
     <cds-root></cds-root>
