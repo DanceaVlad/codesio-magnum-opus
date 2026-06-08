@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/danceavlad/codesio-magnum-opus/frontend:3ecf442ce3e4778344bd58d40e239e87c741f04f
+          image: ghcr.io/danceavlad/codesio-magnum-opus/frontend:649b25c25a905fc58a4057eb8b00e0ee84d40571
           imagePullPolicy: Always
           ports:
             - name: http
