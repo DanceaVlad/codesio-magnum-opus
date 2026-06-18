@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Project CLI"
+  short_description: "Run the repo GitHub workflow for issues, branches, commits, and PRs"
+  default_prompt: "Use $github-project-cli to create or work from a GitHub issue, sync it with the repository project, create the correctly named branch, commit, push, and open a pull request."

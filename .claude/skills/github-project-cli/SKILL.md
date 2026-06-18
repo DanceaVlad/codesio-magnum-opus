@@ -78,33 +78,20 @@ Creates a real repo issue, adds it to project 4, and sets Status, Area, and Type
   "<title>" "<status>" "<area>" "<type>"
 ```
 
-Arguments:
+Arguments (all required, case-sensitive):
 
-| Argument | Required | Options |
-|---|---|---|
-| title | yes | Any string |
-| status | yes | `Todo` \| `In Progress` \| `Done` |
-| area | yes | `Frontend` \| `Backend` \| `Infra` \| `Auth` |
-| type | yes | `Spike` \| `Feature` \| `Task` \| `Bug` \| `Documentation` |
-| body-file | no | Path to a markdown file for the issue body |
-
-Write the issue body to a temp file first, then pass it as the 5th argument. Use `/tmp` for the file; do not write generated issue bodies into the repository.
+| Argument | Options |
+|---|---|
+| title | Any string |
+| status | `Todo` \| `In Progress` \| `Done` |
+| area | `Frontend` \| `Backend` \| `Infra` \| `Auth` |
+| type | `Spike` \| `Feature` \| `Task` \| `Bug` \| `Documentation` |
 
 Example:
 
 ```bash
-cat > /tmp/issue-body.md << 'EOF'
-### Goal
-
-Add Tailwind color scheme support.
-
-### User value
-
-...
-EOF
-
 .agents/skills/github-project-cli/scripts/create-project-issue.sh \
-  "Feature: Add Tailwind color scheme" "Todo" "Frontend" "Feature" /tmp/issue-body.md
+  "Feature: Add Tailwind color scheme" "Todo" "Frontend" "Feature"
 ```
 
 The script intentionally uses `gh issue create`, `gh project item-add`, and `gh project item-edit` instead of `createIssue(projectV2Ids: ...)`. In practice, `createIssue(projectV2Ids: ...)` may create the issue without returning or materializing the project item reliably enough for immediate status editing.

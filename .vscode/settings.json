@@ -2,30 +2,12 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
   },
   "files.exclude": {
-    "**/.claude": true,
-    "**/.codex": true,
-    "**/.zed": true,
-    "**/.vscode": true,
-    "**/.editorconfig": true,
-    "**/.mcp.json": true,
     "**/.angular": true,
     "**/dist": true,
     "**/node_modules": true,
-    "**/.postcssrc*": true,
-    "**/.prettierrc*": true,
-    "**/eslint.config.*": true,
-    "**/tsconfig.json": true,
-    "**/tsconfig.app.json": true,
-    "**/tsconfig.spec.json": true,
-    "**/lefthook.yml": true,
-    "**/.mvn": true,
-    "**/config": true,
-    "**/mvnwm": true,
-    "**/mvnw": true,
-    "**/mvnw.cmd": true
   },
   "prettier.configPath": "magnum-opus-frontend/.prettierrc",
   "prettier.prettierPath": "magnum-opus-frontend/node_modules/prettier",
@@ -33,20 +15,20 @@
   "eslint.workingDirectories": [
     {
       "directory": "magnum-opus-frontend",
-      "changeProcessCWD": true
-    }
+      "changeProcessCWD": true,
+    },
   ],
   "eslint.validate": ["typescript", "html"],
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "[java]": {
-    "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code"
+    "editor.defaultFormatter": "josevseb.google-java-format-for-vs-code",
   },
   "java.format.settings.google.style": "google",
   "java.format.settings.google.version": "1.35.0",
-  "java.format.settings.google.mode": "jar-file"
+  "java.format.settings.google.mode": "jar-file",
 }

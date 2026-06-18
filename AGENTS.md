@@ -22,7 +22,7 @@ backend modules.
 
 # Angular
 
-You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
+You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices from 2026 SOTA.
 
 ## Angular MCP
 
@@ -61,7 +61,7 @@ For trivial edits that are fully determined by nearby code, do not call MCP unle
 - Implement lazy loading for feature routes
 - Do NOT use the `@HostBinding` and `@HostListener` decorators. Put host bindings inside the `host` object of the `@Component` or `@Directive` decorator instead
 - Use `NgOptimizedImage` for all static images.
-  - `NgOptimizedImage` does not work for inline base64 images.
+    - `NgOptimizedImage` does not work for inline base64 images.
 - Use `afterNextRender`/`afterEveryRender` instead of `NgZone.onStable`, `NgZone.onUnstable`, `NgZone.onMicrotaskEmpty`, or `NgZone.isStable`.
 - `NgZone.run` and `NgZone.runOutsideAngular` can remain when they serve a real interop/performance purpose.
 
@@ -116,7 +116,7 @@ For trivial edits that are fully determined by nearby code, do not call MCP unle
 ## Services
 
 - Design services around a single responsibility
-- Use the `providedIn: 'root'` option for singleton services
+- Use the `@Service()` option for singleton services
 - Use the `inject()` function instead of constructor injection
 - Use `provideHttpClient()` and functional providers/interceptors for HTTP setup.
 - Keep services framework-agnostic where practical; put UI-specific state in components or focused facades.

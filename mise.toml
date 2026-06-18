@@ -68,19 +68,3 @@ run = "bun run format:check && bun run lint"
 description = "Check backend formatting and lint Spring Boot Java files"
 dir = "magnum-opus-backend"
 run = "./mvnw -DskipTests spotless:check checkstyle:check pmd:check compile spotbugs:check"
-
-[tasks."format:frontend"]
-description = "Alias for apply:frontend"
-depends = ["apply:frontend"]
-
-[tasks."format:backend"]
-description = "Alias for apply:backend"
-depends = ["apply:backend"]
-
-[tasks."lint:frontend"]
-description = "Alias for check:frontend"
-depends = ["check:frontend"]
-
-[tasks."lint:backend"]
-description = "Alias for check:backend"
-depends = ["check:backend"]
