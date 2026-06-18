@@ -36,13 +36,25 @@ module.exports = tseslint.config(
     },
   },
   {
-    // ZardUI vendored components keep their upstream `z`/`zard` selector
-    // prefixes and source style; exempt them from our app conventions.
-    files: ['src/app/shared/components/**/*.ts', 'src/app/shared/core/**/*.ts'],
+    // ZardUI vendored copy-in code keeps its upstream selector prefixes and
+    // source style (aliased inputs, `any`, inline eslint-disables); exempt it
+    // from our app conventions rather than editing the vendored files.
+    files: [
+      'src/app/shared/components/**/*.ts',
+      'src/app/shared/core/**/*.ts',
+      'src/app/shared/services/**/*.ts',
+    ],
+    linterOptions: {
+      reportUnusedDisableDirectives: 'off',
+    },
     rules: {
       '@angular-eslint/component-selector': 'off',
       '@angular-eslint/directive-selector': 'off',
+      '@angular-eslint/no-input-rename': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-useless-assignment': 'off',
+      'preserve-caught-error': 'off',
     },
   },
   {
