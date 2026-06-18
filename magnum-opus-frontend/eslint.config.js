@@ -36,6 +36,16 @@ module.exports = tseslint.config(
     },
   },
   {
+    // ZardUI vendored components keep their upstream `z`/`zard` selector
+    // prefixes and source style; exempt them from our app conventions.
+    files: ['src/app/shared/components/**/*.ts', 'src/app/shared/core/**/*.ts'],
+    rules: {
+      '@angular-eslint/component-selector': 'off',
+      '@angular-eslint/directive-selector': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+  },
+  {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
   },
